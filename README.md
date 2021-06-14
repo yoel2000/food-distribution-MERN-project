@@ -1,1 +1,1 @@
-# food-distribution-MERN-project
+# food-distribution-client
