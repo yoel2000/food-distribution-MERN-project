@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 const axios = require('axios')
 
 
@@ -9,14 +10,17 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    let history= useHistory();
 
     let mySubmitHandler = (event) => {
         event.preventDefault();
         if (password === confirmPassword) {
-            axios.post('http://localhost:8080/signup', {
+            axios.post('http://localhost:8080/signup2', {
+                'firstname':firstName,
+                'lastname':lastName,
                 'email': email,
                 'password': password
-            })
+            }).then(history.push('/chat'))
         }
         else {
             alert("The confirm password must be same as the password!")
