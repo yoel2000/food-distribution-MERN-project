@@ -9,6 +9,7 @@ import Register from './pages/Register/Register';
 import About from './pages/About/About';
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import contactUs from "./pages/Contact us/Contact us";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/chat" component={Chat} />
       <Route path='/register' component={Register} />
       <Route path='/about' component={About} />
+      <Route path='/contactUs' component={contactUs} />
       </Switch> <br/>
       <Footer/>
       </BrowserRouter>

@@ -23,7 +23,6 @@ function Navbar() {
             <NavLink className="navbar-item" activeClassName="is-active" to="/">
               Home
             </NavLink>
-
             <NavLink
               className="navbar-item"
               activeClassName="is-active"
@@ -31,18 +30,25 @@ function Navbar() {
             >
               About
             </NavLink>
+            <NavLink
+              className="navbar-item"
+              activeClassName="is-active"
+              to="/contactUs"
+            >
+              Contact us
+            </NavLink>
           </div>
 
           <div className="navbar-end">
             <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-white">Log in</a>
-              </div>
+            <NavLink className="navbar-item" to="/login">
+              Log in
+            </NavLink>
             </div>
             <div className="navbar-item">
-                <div className="buttons">
-                <a className="button is-white">Register</a>
-                </div>
+            <NavLink className="navbar-item" to="/register">
+              Register
+            </NavLink>
             </div>
             </div>
           </div>

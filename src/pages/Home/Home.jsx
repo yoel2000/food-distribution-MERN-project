@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import logo from './logo_food_distribution.jpg'
+import home from './Home.css'
 
 function Home() {
     return(
+      <div>
       <h1>
       <Link to="/login">
             Log in <br/>
@@ -18,7 +21,10 @@ function Home() {
       </Link>
       <Link to="/about">About <br/>
       </Link>
+      <Link to="/contactUs"> Contact us</Link>
       </h1>
+      <img src={logo} alt="Logo" className="container-div" />
+      </div>
       )
 
 }

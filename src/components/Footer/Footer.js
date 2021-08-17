@@ -1,6 +1,7 @@
 import React from "react";
 import {Box, Container, Row, Column, FooterLink, Heading,
 } from "./FooterStyles";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
 return (
@@ -13,10 +14,10 @@ return (
 	<Container>
 		<Row>
 		<Column>
-			<Heading>About us</Heading>
+			<FooterLink href="/about">About</FooterLink>
 		</Column>
 		<Column>
-			<Heading>Contact Us</Heading>
+			<FooterLink	href="/contactUs">Contact Us</FooterLink>
 		</Column>
 		</Row>
 	</Container>

@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
     return(
-    <footer className="footer">
+    <div>
     <h1 className="title is-1">This is the About Page</h1>
     <p>
       Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -10,7 +10,7 @@ function About() {
       et ultrices posuere cubilia curae; Duis consequat nulla ac ex consequat,
       in efficitur arcu congue. Nam fermentum commodo egestas.
     </p>
-  </footer>);
+  </div>);
 }
 
 export default About

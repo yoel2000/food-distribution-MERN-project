@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { Button } from 'react-bootstrap';
+import './Login.css';
+
 const axios = require('axios')
 
 
@@ -20,11 +23,13 @@ function Login() {
 
     }
     return(
-        <div>
+        <div className="login-wrapper">
+        <h1> Please login</h1>
         <form onSubmit={mySubmitHandler}>
-            <input type="text" placeholder="email:" onChange={(event)=>setEmail(event.target.value)}/> <br />
-            <input type="text" placeholder="password:" onChange={(event)=>setPassword(event.target.value)}/> <br />
-            <input type="submit" value="login"/><br />
+            <input type="text" className="mb-3" placeholder="email:" onChange={(event)=>setEmail(event.target.value)}/> <br />
+            <input type="text" className="mb-3" placeholder="password:" onChange={(event)=>setPassword(event.target.value)}/> <br />
+            { /*<input type="submit" value="login"/><br /> */}
+            <Button variant="primary" type="submit"> Login </Button>
         </form>
         </div>
     );
