@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Home() {
     return(
@@ -16,8 +16,8 @@ function Home() {
       <Link to="/register">
             Register <br/>
       </Link>
-
-
+      <Link to="/about">About <br/>
+      </Link>
       </h1>
       )
 
