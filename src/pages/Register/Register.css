@@ -1,0 +1,12 @@
+a.social_networks:link, a.social_networks:visited {
+    background-color: lightcoral;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.social_networks:hover, a.social_networks:active {
+    background-color: lightcoral;
+}

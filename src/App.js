@@ -10,6 +10,8 @@ import About from './pages/About/About';
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import contactUs from "./pages/Contact us/Contact us";
+import Home_manager from "./pages/Home_manager/Home_manager";
+import AddressesUpdate from "./pages/AddressesUpdate/AddressesUpdate";
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Route path='/register' component={Register} />
       <Route path='/about' component={About} />
       <Route path='/contactUs' component={contactUs} />
+      <Route path='/home_manager' component={Home_manager} />
+      <Route path='/addressesUpdate' component={AddressesUpdate} />
       </Switch> <br/>
       <Footer/>
       </BrowserRouter>

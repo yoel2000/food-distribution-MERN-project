@@ -1,7 +1,6 @@
 import React from "react";
-import {Box, Container, Row, Column, FooterLink, Heading,
+import {Box, Container, Row, Column, FooterLink,
 } from "./FooterStyles";
-import { NavLink } from "react-router-dom";
 
 const Footer = () => {
 return (

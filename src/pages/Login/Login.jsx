@@ -19,7 +19,9 @@ function Login() {
         axios.post("http://localhost:8080/login", {
             'email': email,
             'password': password
-        }).then((res)=>{console.log(res); history.push('/home')})
+        }).then((res)=>{
+            console.log(res.data);
+            history.push('/home_manager')})
 
     }
     return(

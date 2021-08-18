@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Form, Button} from "react-bootstrap";
+import { Button} from "react-bootstrap";
+import './Register.css';
 
 const axios = require('axios')
 
-
 function Register() {
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ function Register() {
                 <input type="text"  className="mb-3" placeholder="firstname:" onChange={(event)=>setFirstName(event.target.value)}/> <br />
                 <input type="text"  className="mb-3" placeholder="lastname:" onChange={(event)=>setLastName(event.target.value)}/> <br />
                 <input type="text"  className="mb-3" placeholder="email:" onChange={(event)=>setEmail(event.target.value)}/> <br />
-                <h6 className="text-muted"> We'll never share your email with anyone else.</h6> <br/>
+                <h8 className="text-muted"> We'll never share your email with anyone else.</h8> <br/>
                 <input type="text"  className="mb-3" placeholder="password:" onChange={(event)=>setPassword(event.target.value)}/> <br />
                 <input type="text"  className="mb-3" placeholder="confirm your password:" onChange={(event)=>setConfirmPassword(event.target.value)}/> <br />
                 { /*<input type="submit" value="Register now"/><br /> */}
@@ -45,10 +46,12 @@ function Register() {
         </Button>
             </form>
             <p1>You can also register with: </p1> <br />
-            <a href="http://localhost:8080/auth/google">Google</a> <br />
-            <a href="http://localhost:8080/auth/facebook">Facebook</a> <br />
+            <div>
+            <a className="social_networks" href="http://localhost:8080/auth/google">Google</a> <br /> <br/>
+            <a className="social_networks" href="http://localhost:8080/auth/facebook">Facebook</a> <br />
+            </div>
         </div>
-        <Form>
+        {/*<Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
@@ -67,7 +70,7 @@ function Register() {
         <Button variant="primary" type="submit">
           Submit
         </Button>
-      </Form>
+        </Form>*/}
       </div>
     );
 }

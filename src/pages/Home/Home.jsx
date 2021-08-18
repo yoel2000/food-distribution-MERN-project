@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from './logo_food_distribution.jpg'
-import home from './Home.css'
+import './Home.css'
 
 function Home() {
     return(
