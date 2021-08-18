@@ -12,6 +12,9 @@ import Footer from "./components/Footer/Footer";
 import contactUs from "./pages/Contact us/Contact us";
 import Home_manager from "./pages/Home_manager/Home_manager";
 import AddressesUpdate from "./pages/AddressesUpdate/AddressesUpdate";
+import NavbarManager from "./components/NavBarManager/NavBarManager";
+import DividersUpdate from "./pages/DividersUpdate/DividersUpdate";
+import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
 
 
 function App() {
@@ -22,13 +25,18 @@ function App() {
       <Switch>
       <Route path="/" component={Home} exact />
       <Route path="/login" component={Login} exact />
-      <Route path="/blog" component={Blog} />
-      <Route path="/chat" component={Chat} />
       <Route path='/register' component={Register} />
       <Route path='/about' component={About} />
       <Route path='/contactUs' component={contactUs} />
-      <Route path='/home_manager' component={Home_manager} />
+      <BrowserRouter>
+      <NavbarManager/>
+      <Route path='/home_manager' component={Home_manager}/>
       <Route path='/addressesUpdate' component={AddressesUpdate} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/chat" component={Chat} />
+      <Route path="/dividersUpdate" component={DividersUpdate} />
+      <Route path="/dailyDistribution" component={DailyDistribution} />
+      </BrowserRouter>
       </Switch> <br/>
       <Footer/>
       </BrowserRouter>
