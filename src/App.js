@@ -15,6 +15,8 @@ import AddressesUpdate from "./pages/AddressesUpdate/AddressesUpdate";
 import NavbarManager from "./components/NavBarManager/NavBarManager";
 import DividersUpdate from "./pages/DividersUpdate/DividersUpdate";
 import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
+import HomeWorker from "./pages/Home_worker/Home_worker";
+import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
 
 
 function App() {
@@ -36,6 +38,12 @@ function App() {
       <Route path="/chat" component={Chat} />
       <Route path="/dividersUpdate" component={DividersUpdate} />
       <Route path="/dailyDistribution" component={DailyDistribution} />
+      </BrowserRouter>
+      <BrowserRouter>
+      <NavbarWorker/>
+      <Route path='/home_worker' component={HomeWorker} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/chat" component={Chat} />
       </BrowserRouter>
       </Switch> <br/>
       <Footer/>

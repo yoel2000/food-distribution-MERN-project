@@ -13,6 +13,7 @@ function Home() {
       <Link to="/register">
             Register <br/>
       </Link>
+      <Link to='/home_worker'> Home worker</Link>
       </h1>
       <img src={logo} alt="Logo" className="container-div" />
       </div>
