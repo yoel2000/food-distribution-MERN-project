@@ -8,6 +8,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import "./DividersUpdate.css";
+import { useEffect } from "react";
+import UpdateForm from "./UpdateForm";
 
 const axios = require('axios')
 
@@ -21,7 +23,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 
+
 function DividersUpdate() {
+    useEffect(() => {
+        axios.get("http://localhost:8080/distributors").then(x => setDividersList(x.data))
+    }, [])
+
     let [dividersList, setDividersList] = useState([])
     let [formVisibility, setFormVisibility] = useState(false)
     const classes = useStyles();
@@ -67,7 +74,7 @@ function DividersUpdate() {
                     )}
                 </List>
             </div>
-            
+            <UpdateForm dividersList={dividersList}/>
 
 
 
