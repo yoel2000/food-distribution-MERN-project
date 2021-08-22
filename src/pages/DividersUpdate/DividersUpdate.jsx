@@ -25,9 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function DividersUpdate() {
-    useEffect(() => {
-        axios.get("http://localhost:8080/distributors").then(x => setDividersList(x.data))
-    }, [])
+
 
     let [dividersList, setDividersList] = useState([])
     let [formVisibility, setFormVisibility] = useState(false)
@@ -39,6 +37,10 @@ function DividersUpdate() {
         setSelectedIndex(index);
         setSelectedId(id);
     };
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/distributors").then(x => setDividersList(x.data))
+    }, [selectedId])
 
     let openAddingForm = () => {
         setFormVisibility(true)
@@ -54,7 +56,7 @@ function DividersUpdate() {
             'name': obj.name,
             'telephone': obj.telephone,
         }).then((res) => {
-            console.log(res.data); console.log(res.data)
+            console.log(res.data);
         })
 
     }

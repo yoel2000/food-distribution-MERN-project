@@ -29,16 +29,17 @@ function UpdateForm(props) {
     useEffect(() => {
         console.log(entries)
         entries.map(x => setValues((values) => ({...values, [x[0]]: x[1]})))
-    }, [props.dividersList, props.selectedId]);
+    }, [props.selectedId]);
+
 
     return (
         <div>
             <form onSubmit={updateDistributor}>
-            {(entries.length > 0) ? entries.map((x, key) =>
+            {(entries.length > 0) ? entries.filter(x => x[0] != "id").map((x, key) =>
                 <div key={key}>
                     <label>{x[0]}:</label>
                     <input value={values[x[0]]} onChange={(e) => setValues({...values, [x[0]]: e.target.value})} type="text" />
-                </div>) : null} <br/>
+                </div>) : null}  <br/>
             <Button type="submit"> Update distributor</Button>
             </form>
         </div>
