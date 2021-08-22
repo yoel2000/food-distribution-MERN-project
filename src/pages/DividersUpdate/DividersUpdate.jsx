@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+
 import "./DividersUpdate.css";
 import { useEffect } from "react";
 import UpdateForm from "./UpdateForm";
@@ -33,9 +33,11 @@ function DividersUpdate() {
     let [formVisibility, setFormVisibility] = useState(false)
     const classes = useStyles();
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedId, setSelectedId] = useState(-1);
 
-    const handleListItemClick = (event, index) => {
+    const handleListItemClick = (event, index, id) => {
         setSelectedIndex(index);
+        setSelectedId(id);
     };
 
     let openAddingForm = () => {
@@ -45,18 +47,17 @@ function DividersUpdate() {
     let addDivider = (event, obj) => {
         event.preventDefault()
         setDividersList([...dividersList, obj])
+        debugger
         console.log(dividersList)
         axios.post("http://localhost:8080/addDistributor", {
             'email': obj.email,
             'name': obj.name,
-            'telephone': obj.telephone
+            'telephone': obj.telephone,
         }).then((res) => {
             console.log(res.data); console.log(res.data)
         })
 
-
     }
-
 
     return (
         <div className="container">
@@ -66,16 +67,14 @@ function DividersUpdate() {
             </div>
             <div className={classes.root}>
                 <List component="nav" aria-label="main mailbox folders">
-
                     {dividersList.map((x, index) =>
-                    (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index)} key={index}>
+                    (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index, x.id)} key={index}>
                                   <ListItemText primary={x.name} />
                     </ListItem>)
                     )}
                 </List>
             </div>
-            <UpdateForm dividersList={dividersList}/>
-
+            <UpdateForm dividersList={dividersList} selectedId={selectedId} setDividersList={setDividersList}/>
 
 
         </div>
@@ -90,14 +89,14 @@ function AddForm(props) {
 
     return (
         <div>
-            <form onSubmit={(e) => props.addDivider(e, { telephone: telephone, email: email, name: name })}>
+            <form onSubmit={(e) => props.addDivider(e, { telephone:telephone, name:name, email:email })}>
                 Telephone:
                 <input type="text" placeholder="telephone" onChange={(event) => setTelephone(event.target.value)} /> <br />
                 Name:
                 <input type="text" placeholder="name" onChange={(event) => setName(event.target.value)} /> <br />
                 Email:
-                <input type="text" placeholder="email" onChange={(event) => setEmail(event.target.value)} /> <br /> <br />
-                <Button type="submit"> Add divider</Button>
+                <input type="text" placeholder="email" onChange={(event) => setEmail(event.target.value)} /> <br /><br />
+                <Button type="submit"> Add distributor</Button>
             </form>
 
 
