@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 import './Login.css';
-import { useMemo } from 'react';
 
 const axios = require('axios')
 

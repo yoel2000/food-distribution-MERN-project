@@ -46,7 +46,6 @@ function App() {
       <Route path="/chat" component={Chat} />
       </BrowserRouter>
       </Switch> <br/>
-      <Footer/>
       </BrowserRouter>
     );
 }
