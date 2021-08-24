@@ -11,12 +11,12 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import contactUs from "./pages/Contact us/Contact us";
 import Home_manager from "./pages/Home_manager/Home_manager";
-import AddressesUpdate from "./pages/AddressesUpdate/AddressesUpdate";
 import NavbarManager from "./components/NavBarManager/NavBarManager";
 import DividersUpdate from "./pages/DividersUpdate/DividersUpdate";
 import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
 import HomeWorker from "./pages/Home_worker/Home_worker";
 import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
+import Deliveries from "./pages/Deliveries/Deliveries";
 
 
 function App() {
@@ -33,11 +33,12 @@ function App() {
       <BrowserRouter>
       <NavbarManager/>
       <Route path='/home_manager' component={Home_manager}/>
-      <Route path='/addressesUpdate' component={AddressesUpdate} />
+      <Route path='/deliveries' component={Deliveries} />
       <Route path="/blog" component={Blog} />
       <Route path="/chat" component={Chat} />
       <Route path="/dividersUpdate" component={DividersUpdate} />
       <Route path="/dailyDistribution" component={DailyDistribution} />
+      <Route path='/addressesUpdate' component={Deliveries} />
       </BrowserRouter>
       <BrowserRouter>
       <NavbarWorker/>

@@ -1,10 +1,10 @@
 import React from "react"
-import GoogleMapReact from 'google-map-react';
-//import { InfoWindow, Marker } from 'google-maps-react';
+import './index.css';
+
 import { useState } from "react";
 import {GoogleMap, useLoadScript, Marker, InfoWindow,
   } from "@react-google-maps/api";
-  import usePlacesAutocomplete, {
+import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
   } from "use-places-autocomplete";
@@ -20,6 +20,7 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow,
   import "@reach/combobox/styles.css";
   import mapStyles from "./mapStyles";
 
+  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
   const libraries = ["places"];
   const mapContainerStyle = {
     height: "100vh",
@@ -35,7 +36,10 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow,
     lng: 35,
   };
 
-  export default function AddressesUpdate() {
+function Map() {
+
+    const axios = require('axios')
+
     const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
       libraries,
@@ -67,14 +71,10 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow,
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
 
+
     return (
       <div>
-        <h1>
-          Bears{" "}
-          <span role="img" aria-label="tent">
-            ⛺️
-          </span>
-        </h1>
+
 
         <Locate panTo={panTo} />
         <Search panTo={panTo} />
@@ -134,7 +134,7 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow,
           );
         }}
       >
-        <img src="/compass.svg" alt="compass" />
+        <img src="/locate_me.jpg" alt="locate me" width="50%" height="50%"/>
       </button>
     );
   }
@@ -194,42 +194,4 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow,
     );
   }
 
-/*
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function AddressesUpdate() {
-
-    const [showingInfoWindow, setShowingInfoWindow] = useState(false)
-    const [activeMarker, setActiveMarker] = useState('')
-    const [selectedPlace, setSelectedPlace] = useState('')
-
-    let defaultProps = {
-        center: {
-            lat: 32.024651,
-            lng: 34.752899
-        },
-        zoom: 14
-    };
-
-    return (
-        <div style={{ height: '80vh', width: '100%' }}>
-            <input type="text"/>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyAGeYHj4QY2r26HUdbUGyQ2X0DRk-BUZpw" }}
-                defaultCenter={defaultProps.center}
-                defaultZoom={defaultProps.zoom}>
-                <AnyReactComponent
-                    lat={32.024651}
-                    lng={34.752899}
-                    text="My Marker"
-                />
-            </GoogleMapReact>
-        </div>
-    )
-}*/
-
-
-
-
-
-
+  export default Map

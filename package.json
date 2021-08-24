@@ -22,6 +22,7 @@
     "react-bootstrap-validation": "^0.1.11",
     "react-date-picker": "^8.3.2",
     "react-dom": "^17.0.2",
+    "react-geocode": "^0.2.3",
     "react-google-maps": "^9.4.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
