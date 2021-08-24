@@ -17,6 +17,7 @@ import DividersUpdate from "./pages/DividersUpdate/DividersUpdate";
 import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
 import HomeWorker from "./pages/Home_worker/Home_worker";
 import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
+import ChatContainer from "./pages/ChatContainer/ChatContainer";
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
       <NavbarWorker/>
       <Route path='/home_worker' component={HomeWorker} />
       <Route path="/blog" component={Blog} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/chat" component={ChatContainer} />
       </BrowserRouter>
       </Switch> <br/>
       </BrowserRouter>
