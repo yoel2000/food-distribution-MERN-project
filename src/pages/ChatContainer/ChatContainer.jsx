@@ -1,7 +1,11 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import io from "socket.io-client";
 import Chat from "../Chat/Chat";
 function ChatContainer() {
-    const socket = io.connect('http://localhost:8080');
+
+    const [socket,setSocket] = useState(null)
+  
 return (<Chat socket={socket} ></Chat>)
 }
 
