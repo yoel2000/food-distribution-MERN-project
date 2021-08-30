@@ -43,9 +43,12 @@ function DailyDistribution() {
 
     let addProduct = (event, obj) => {
         event.preventDefault()
-        setProductList([...productList, obj])
-        console.log(productList)
-        axios.post("http://localhost:8080/addProduct", {
+        obj.date = obj.date.toISOString().split('T')[0]
+
+        setProductList((productList) => ([...productList, obj]))
+
+        console.log(obj)
+        axios.put("http://localhost:8080/addProduct", {
             'name': obj.name,
             'date': obj.date,
             'address': obj.address
@@ -53,6 +56,8 @@ function DailyDistribution() {
             console.log(res.data);
         })
     }
+
+
 
     return(
         <div className="container">
@@ -88,7 +93,8 @@ function AddForm(props) {
                 Adress:
                 <input type="text" placeholder="address" onChange={(event) => setAddress(event.target.value)} /> <br />
                 Date:
-                <DatePicker onChange={setDate} value={date}/> <br />
+                {/*<DatePicker dateFormat="dd.MM.y" onChange={(date) => setDate(date)} value={date}/> <br />*/}
+                <DatePicker  onChange={date => setDate(date)} value={date} dateFormat="DD/MM/YYYY"/>
                 <Button type="submit"> Add product</Button>
             </form>
         </div>

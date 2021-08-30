@@ -1,44 +1,40 @@
 import React from "react"
 import './index.css';
-
 import { useState } from "react";
-import {GoogleMap, useLoadScript, Marker, InfoWindow,
-  } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-  } from "use-places-autocomplete";
-  import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-  } from "@reach/combobox";
-  import { formatRelative } from "date-fns";
+import {GoogleMap, useLoadScript, Marker, InfoWindow} from "@react-google-maps/api";
+import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete";
+import {Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption,} from "@reach/combobox";
+import { formatRelative } from "date-fns";
+import "@reach/combobox/styles.css";
+import mapStyles from "./mapStyles";
+import { useEffect } from "react"
+import Geocode from "react-geocode";
 
-  import "@reach/combobox/styles.css";
-  import mapStyles from "./mapStyles";
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setRegion("isr");
+Geocode.setLocationType("ROOFTOP");
 
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
-  const libraries = ["places"];
-  const mapContainerStyle = {
-    height: "100vh",
-    width: "100vw",
-  };
-  const options = {
-    styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true,
-  };
-  const center = {
-    lat: 32.024651,
-    lng: 35,
-  };
+const axios = require('axios')
+const libraries = ["places"];
+const mapContainerStyle = {
+  height: "100vh",
+  width: "100vw",
+};
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
-function Map() {
+function Map({deliveries, latitude, longitude}) {
 
-    const axios = require('axios')
+    const center = {
+      lat: latitude[0],
+      lng: longitude[0],
+    };
+    const centers = [
+      latitude, longitude
+    ]
 
     const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -46,17 +42,22 @@ function Map() {
     });
     const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(null);
+    const [address, setAddress] = useState('')
+
 
     const onMapClick = React.useCallback((e) => {
-      setMarkers((current) => [
+    for (let i = 0; i < latitude.length; i++) {
+      setMarkers((current) =>
+      [
         ...current,
         {
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
+          lat: latitude[i],
+          lng: longitude[i],
           time: new Date(),
         },
-      ]);
-    }, []);
+      ])
+    }
+  });
 
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback((map) => {
@@ -65,7 +66,7 @@ function Map() {
 
     const panTo = React.useCallback(({ lat, lng }) => {
       mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(14);
+      mapRef.current.setZoom(12);
     }, []);
 
     if (loadError) return "Error";
@@ -74,10 +75,9 @@ function Map() {
 
     return (
       <div>
-
-
         <Locate panTo={panTo} />
         <Search panTo={panTo} />
+        <input type="button" onClick={(event) => onMapClick(event)} value="Load the place to deliver" />
 
         <GoogleMap
           id="map"
@@ -85,18 +85,20 @@ function Map() {
           zoom={8}
           center={center}
           options={options}
-          onClick={onMapClick}
+          // onClick={onMapClick}
           onLoad={onMapLoad}
         >
-          {markers.map((marker) => (
-            <Marker
-              key={`${marker.lat}-${marker.lng}`}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onClick={() => {
-                setSelected(marker);
-              }}
+
+        {markers.map((marker) => (
+          <Marker
+            key={deliveries.id}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => {
+              console.log(markers);
+              setSelected(marker);
+            }}
             />
-          ))}
+        ))}
 
           {selected ? (
             <InfoWindow
@@ -106,9 +108,11 @@ function Map() {
               }}
             >
               <div>
-                <h2>
-                  You selectionned a place
-                </h2>
+                {
+                  
+                }
+
+
                 <p>{formatRelative(selected.time, new Date())}</p>
               </div>
             </InfoWindow>
@@ -148,8 +152,8 @@ function Map() {
       clearSuggestions,
     } = usePlacesAutocomplete({
       requestOptions: {
-        location: { lat: () => 43.6532, lng: () => -79.3832 },
-        radius: 100 * 1000,
+        location: { lat: () => 31, lng: () => 35 },
+        radius: 50 * 1000,
       },
     });
 
@@ -179,7 +183,7 @@ function Map() {
             value={value}
             onChange={handleInput}
             disabled={!ready}
-            placeholder="Search your location"
+            placeholder="Search a location"
           />
           <ComboboxPopover>
             <ComboboxList>

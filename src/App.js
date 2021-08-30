@@ -17,6 +17,7 @@ import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
 import HomeWorker from "./pages/Home_worker/Home_worker";
 import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
 import Deliveries from "./pages/Deliveries/Deliveries";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Route path="/dividersUpdate" component={DividersUpdate} />
       <Route path="/dailyDistribution" component={DailyDistribution} />
       <Route path='/addressesUpdate' component={Deliveries} />
+      <Route path='/dashboard' component={Dashboard} />
       </BrowserRouter>
       <BrowserRouter>
       <NavbarWorker/>
