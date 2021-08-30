@@ -1,5 +1,4 @@
 import React from "react"
-import { render } from "react-dom"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -18,11 +17,15 @@ import HomeWorker from "./pages/Home_worker/Home_worker";
 import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
 import Deliveries from "./pages/Deliveries/Deliveries";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import ChatContainer from "./pages/ChatContainer/ChatContainer";
+import { UserContextProvider } from "./UserContext";
+import { ManagerChat } from "./pages/ManagerChat/ManagerChat";
 
 
 function App() {
     return (
       <BrowserRouter>
+      <UserContextProvider>
       <Navbar/>
       <div className="container mt-2" style={{ marginTop: 40 }}></div>
       <Switch>
@@ -36,7 +39,7 @@ function App() {
       <Route path='/home_manager' component={Home_manager}/>
       <Route path='/deliveries' component={Deliveries} />
       <Route path="/blog" component={Blog} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/chat" component={ManagerChat} />
       <Route path="/dividersUpdate" component={DividersUpdate} />
       <Route path="/dailyDistribution" component={DailyDistribution} />
       <Route path='/addressesUpdate' component={Deliveries} />
@@ -46,9 +49,10 @@ function App() {
       <NavbarWorker/>
       <Route path='/home_worker' component={HomeWorker} />
       <Route path="/blog" component={Blog} />
-      <Route path="/chat" component={Chat} />
+      <Route path="/chat" component={ManagerChat} />
       </BrowserRouter>
-      </Switch> <br/>
+      </Switch>
+      </UserContextProvider>
       </BrowserRouter>
     );
 }
