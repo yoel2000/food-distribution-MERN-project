@@ -10,16 +10,7 @@ return (
 				marginTop: "-50px" }}>
 		Food distribution
 	</h1>
-	<Container>
-		<Row>
-		<Column>
-			<FooterLink href="/about">About</FooterLink>
-		</Column>
-		<Column>
-			<FooterLink	href="/contactUs">Contact Us</FooterLink>
-		</Column>
-		</Row>
-	</Container>
+	
 	</Box>
 );
 };

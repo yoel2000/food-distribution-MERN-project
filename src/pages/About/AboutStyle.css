@@ -1,0 +1,12 @@
+.main-heading {
+    color: rgb(18, 18, 180);
+    font-size: 26px;
+}
+
+.underline {
+    height: 04px;
+    width: 4rem;
+    background-color: rgba(18, 18, 180, 0.6);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
