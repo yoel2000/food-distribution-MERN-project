@@ -12,10 +12,12 @@ import contactUs from "./pages/Contact us/Contact us";
 import Home_manager from "./pages/Home_manager/Home_manager";
 import NavbarManager from "./components/NavBarManager/NavBarManager";
 import DividersUpdate from "./pages/DividersUpdate/DividersUpdate";
-import DailyDistribution from "./pages/DailyDistribution/DailyDistribution";
 import HomeWorker from "./pages/Home_worker/Home_worker";
 import NavbarWorker from "./components/NavbarWorker/NavBarWorker";
-import Deliveries from "./pages/Deliveries/Deliveries";
+
+import DailyDistribution from "./pages/DailyDistribution/DailyDistribution2";
+import Deliveries from "./pages/Deliveries/Deliveries2";
+
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ChatContainer from "./pages/ChatContainer/ChatContainer";
 import { UserContextProvider } from "./UserContext";
