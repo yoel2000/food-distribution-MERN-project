@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DatePicker from 'react-date-picker';
-import UpdateDistribution from "./UpdateDistribution"
+import UpdateDistribution from "./UpdateDistribution2"
 
 const axios = require('axios')
 
@@ -26,6 +26,7 @@ function DailyDistribution() {
     let [formVisibility, setFormVisibility] = useState(false)
     const [selectedId, setSelectedId] = useState(-1);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [distributionList,setDistributionList]=useState([])
     const classes = useStyles();
 
     //todo:move it to other file
@@ -40,39 +41,17 @@ function DailyDistribution() {
         setFormVisibility(true)
     }
 
-
-
-    // useEffect(() => {
-    //     axios.get("http://localhost:8080/products").then(x => setProductList(x.data))
-    // }, [selectedId])
-
     useEffect(() => {
         debugger;
         axios.get("http://localhost:8080/products2").then(res => setProductList(res.data))
+        axios.get("http://localhost:8080/distributions").then(res => setDistributionList(res.data))
+
     }, [])
-
-    let addProduct2 = (event, obj) => {
-        event.preventDefault()
-        obj.date = obj.date.toISOString().split('T')[0]
-
-        setProductList((productList) => ([...productList, obj]))
-
-        console.log(obj)
-        axios.put("http://localhost:8080/addProduct", {
-            'name': obj.name,
-            'date': obj.date,
-            'address': obj.address
-        }).then((res) => {
-            console.log(res.data);
-        })
-    }
 
     let addProduct = () => {
         axios.post("http://localhost:8080/products", { name: productName })
             .then(res => setProductList(res.data))
     }
-
-    
 
     return (
 
@@ -84,19 +63,18 @@ function DailyDistribution() {
 
 
                 <div>
-                    <input type="button" onClick={openAddingForm} value="+" />
-                    {formVisibility ? <AddForm products={productList} /> : null}
+                    <AddForm products={productList} setDistributionList={setDistributionList}/>
                 </div>
                 <div className={classes.root}>
                     <List component="nav" aria-label="main mailbox folders">
-                        {productList.map((x, index) =>
+                        {distributionList.map((x, index) =>
                         (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index, x.id)} key={index}>
-                            <ListItemText primary={x.name} secondary={x.date + "  -  " + x.address} />
+                            <ListItemText primary={new Date(x.date).toLocaleDateString("en-US")} secondary={x.address} />
                         </ListItem>)
                         )}
                     </List>
                 </div>
-                <UpdateDistribution productList={productList} selectedId={selectedId} setProductList={setProductList} />
+                <UpdateDistribution distributionList={distributionList} selectedId={selectedId} setDistributionList={setDistributionList} />
             </div></div>
     )
 }
@@ -118,7 +96,7 @@ function AddForm(props) {
             date: date,
             address: address,
             productIds: productIdList,
-        })
+        }).then(res=>props.setDistributionList(res.data))
     }
 
     let addProductId=()=>{
