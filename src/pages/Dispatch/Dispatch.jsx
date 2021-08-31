@@ -28,7 +28,6 @@ function Dispatch(props) {
                         if (res.data.idxs[i] === id) {
                             address = deliveries[i][2]
                             const obj = {
-                                
                                 'address': address,
                                 'name': d.name
                             }
