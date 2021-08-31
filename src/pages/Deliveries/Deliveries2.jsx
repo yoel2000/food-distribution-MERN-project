@@ -7,7 +7,8 @@ import Dividers from "../DividersUpdate/Dividers";
 import Dispatch from "../Dispatch/Dispatch2";
 
 const axios = require('axios')
-Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setApiKey("AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg");
+console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 
@@ -33,15 +34,17 @@ function Deliveries() {
 
 
     let transformation = (deliveries, event) => {
-        debugger;
         console.log(deliveries);
         event.preventDefault();
         deliveries.forEach(del => {
+            console.log(del.address)
         Geocode.fromAddress(del.address).then(
         (response) => {
+            console.log(response)
             let { lat, lng } = response.results[0].geometry.location;
-            setLatitude((latitude) => ([...latitude, lat]))
-            setLongitude((longitude) => ([...longitude, lng]))
+            console.log(lat)
+            setLatitude((latitude) => [...latitude, lat])
+            setLongitude((longitude) => [...longitude, lng])
         },
         (error) => {
             console.error("error parsing:"+error);

@@ -14,7 +14,6 @@ function Dispatch(props) {
         event.preventDefault()
         console.log(dividersList);
         console.log(deliveries)
-        debugger;
         axios.post("http://localhost:8080/dispatch", {
                 'dividersList': dividersList,
                 'deliveries': deliveries,
@@ -22,12 +21,13 @@ function Dispatch(props) {
                 'longitude': longitude,
             }).then((res) => {
                 console.log(res.data.idxs);
-                console.log(res.data);
                 dividersList.map((d, id) => {
 
                     for (let i = 0; i < res.data.idxs.length; i++) {
                         if (res.data.idxs[i] === id) {
                             address = deliveries[i].address
+                            debugger;
+                            console.log(address)
                             const obj = {
                                 
                                 'address': address,

@@ -10,7 +10,7 @@ import mapStyles from "./mapStyles";
 import { useEffect } from "react"
 import Geocode from "react-geocode";
 
-Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setApiKey("AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg");
 Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 
@@ -37,7 +37,7 @@ function Map({deliveries, latitude, longitude}) {
     ]
 
     const { isLoaded, loadError } = useLoadScript({
-      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+      googleMapsApiKey: "AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg",
       libraries,
     });
     const [markers, setMarkers] = React.useState([]);
