@@ -12,7 +12,7 @@ Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 
 function Deliveries() {
-    let [dividersList, setDividersList] = useState([])
+    let [distributorList, setDistributorList] = useState([])
     const [deliveries, setDeliveries] = useState([])
     const [latitude, setLatitude] = useState([])
     const [longitude, setLongitude] = useState([])
@@ -21,20 +21,20 @@ function Deliveries() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:8080/distributors").then(x => setDividersList(x.data))
+        axios.get("http://localhost:8080/users").then(x => setDistributorList(x.data))
     }, [selectedId])
 
     useEffect(() => {
         axios.get('http://localhost:8080/deliveriestoday2').then((deliveries) => {
         console.log(deliveries.data)
+        transformation(deliveries.data)
         setDeliveries(deliveries.data)
         })
       }, [selectedId])
 
 
-    let transformation = (deliveries, event) => {
+    let transformation = (deliveries) => {
         console.log(deliveries);
-        event.preventDefault();
         deliveries.forEach(del => {
             console.log(del.address+", "+del.city)
         Geocode.fromAddress(del.address+", "+del.city).then(
@@ -62,10 +62,9 @@ function Deliveries() {
         <h3>There are {deliveries.length} deliveries for today</h3>
         <h3 style={{float: "right"}}>
         The deliverers:
-        <Dividers dividersList={dividersList} setSelectedId={setSelectedId}/>
+        <Dividers dividersList={distributorList} setSelectedId={setSelectedId}/>
         </h3>
-        <input type="button" onClick={(event) => transformation(deliveries, event)} value="Load the map" />
-        <Dispatch dividersList={dividersList} deliveries={deliveries} latitude={latitude} longitude={longitude}/>
+        <Dispatch dividersList={distributorList} deliveries={deliveries} latitude={latitude} longitude={longitude}/>
         <Map deliveries={deliveries} latitude={latitude} longitude={longitude}/>
         </div>
       )}

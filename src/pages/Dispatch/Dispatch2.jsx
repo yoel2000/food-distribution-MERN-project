@@ -55,7 +55,7 @@ function Dispatch(props) {
 
     return(
         <div>
-            <input type="button" onClick={(event) => dispatch(event, userList, props.deliveries, props.latitude, props.longitude)} value="Dispatch" />
+            <input type="button" onClick={(event) => dispatch(event, userList, props.deliveries, props.latitude, props.longitude)} value="determine distribution areas" />
         </div>
     )
 }

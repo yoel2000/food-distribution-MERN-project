@@ -54,6 +54,7 @@ function Map({deliveries, latitude, longitude}) {
           lat: latitude[i],
           lng: longitude[i],
           time: new Date(),
+          
         },
       ])
     }
@@ -75,10 +76,9 @@ function Map({deliveries, latitude, longitude}) {
 
     return (
       <div>
+        <input type="button" onClick={(event) => onMapClick(event)} value="mark the places in the map" />
         <Locate panTo={panTo} />
         <Search panTo={panTo} />
-        <input type="button" onClick={(event) => onMapClick(event)} value="Load the place to deliver" />
-
         <GoogleMap
           id="map"
           mapContainerStyle={mapContainerStyle}
