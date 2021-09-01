@@ -51,6 +51,7 @@ function DailyDistribution() {
         axios.put("http://localhost:8080/addProduct", {
             'name': obj.name,
             'date': obj.date,
+            'city':obj.city,
             'address': obj.address
         }).then((res) => {
             console.log(res.data);

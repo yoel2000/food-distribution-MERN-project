@@ -4,8 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import userEvent from "@testing-library/user-event";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Dividers(props) {
+function UserList(props) {
 
 
     const classes = useStyles();
@@ -26,12 +24,23 @@ function Dividers(props) {
         props.setSelectedId(id);
     };
 
+    let getName= (user)=>{
+        let name;
+        if (user.local)
+            name= user.local.firstname+user.local.lastname;
+        else if (user.google)
+            name= user.google.name;
+        else if (user.facebook)
+            name =user.facebook.name;
+        return name;
+    }
+
     return (
         <div className={classes.root}>
             <List component="nav" aria-label="main mailbox folders">
-                {props.dividersList.map((x, index) =>
+                {props.userList.map((x, index) =>
                 (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index, x.id)} key={index}>
-                    <ListItemText primary={x.name} />
+                    <ListItemText primary={getName(x)} />
                 </ListItem>)
                 )}
             </List>
@@ -40,4 +49,4 @@ function Dividers(props) {
 
 }
 
-export default Dividers
+export default UserList

@@ -10,7 +10,7 @@ import mapStyles from "./mapStyles";
 import { useEffect } from "react"
 import Geocode from "react-geocode";
 
-Geocode.setApiKey("AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg");
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 
