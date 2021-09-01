@@ -90,7 +90,7 @@ function Register() {
                     fullWidth required />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField type="password" placeholder="Confirm your password" label="COnfirm Password" variant="outlined" onChange={(event) => setConfirmPassword(event.target.value)}
+                    <TextField type="password" placeholder="Confirm your password" label="Confirm Password" variant="outlined" onChange={(event) => setConfirmPassword(event.target.value)}
                     fullWidth required />
                   </Grid>
                   <Grid item xs={12}>
