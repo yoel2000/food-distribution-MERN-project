@@ -23,7 +23,7 @@ import ChatContainer from "./pages/ChatContainer/ChatContainer";
 import { UserContextProvider } from "./UserContext";
 import { ManagerChat } from "./pages/ManagerChat/ManagerChat";
 import myPieChart from "./components/PieChart/PieChart";
-import myChart from "./components/Chart/Chart";
+import MyChart from "./components/Chart/Chart";
 
 
 
@@ -50,7 +50,7 @@ function App() {
       <Route path='/addressesUpdate' component={Deliveries} />
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/piechart' component={myPieChart} />
-      <Route path="/mychart" component={myChart} />
+      <Route path="/mychart" component={MyChart} />
       </BrowserRouter>
       <BrowserRouter>
       <NavbarWorker/>

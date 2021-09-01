@@ -59,8 +59,6 @@ function DailyDistribution() {
             <input type="button" value="add product" onClick={addProduct} />
 
             <div className="container">
-
-
                 <div>
                     <AddForm products={productList} setDistributionList={setDistributionList}/>
                 </div>
@@ -122,7 +120,6 @@ function AddForm(props) {
             Products List: <ul>{productIdList.map((x,key)=><li key={key}>{x.name}</li>)}</ul>
             City:
             <input type="text" placeholder="city" onChange={(event) => setCity(event.target.value)} /> <br />
-
             Address:
             <input type="text" placeholder="address" onChange={(event) => setAddress(event.target.value)} /> <br />
             Date:
