@@ -37,8 +37,8 @@ function Deliveries() {
         console.log(deliveries);
         event.preventDefault();
         deliveries.forEach(del => {
-            console.log(del.address)
-        Geocode.fromAddress(del.address).then(
+            console.log(del.address+", "+del.city)
+        Geocode.fromAddress(del.address+", "+del.city).then(
         (response) => {
             console.log(response)
             let { lat, lng } = response.results[0].geometry.location;

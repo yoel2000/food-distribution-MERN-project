@@ -42,7 +42,6 @@ function DailyDistribution() {
     }
 
     useEffect(() => {
-        debugger;
         axios.get("http://localhost:8080/products2").then(res => setProductList(res.data))
         axios.get("http://localhost:8080/distributions").then(res => setDistributionList(res.data))
 
@@ -69,7 +68,7 @@ function DailyDistribution() {
                     <List component="nav" aria-label="main mailbox folders">
                         {distributionList.map((x, index) =>
                         (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index, x.id)} key={index}>
-                            <ListItemText primary={new Date(x.date).toLocaleDateString("en-US")} secondary={x.address} />
+                            <ListItemText primary={new Date(x.date).toLocaleDateString("en-US")} secondary={x.address+", "+x.city} />
                         </ListItem>)
                         )}
                     </List>
@@ -84,6 +83,7 @@ function AddForm(props) {
     let [productIdList, setProductIdList] = useState([])
     let [selected, setSelected] = useState()
     const [date, setDate] = useState(new Date());
+    let [city, setCity] = useState('')
     let [address, setAddress] = useState('')
     const [amount, setAmount] = useState(0);
 
@@ -94,6 +94,7 @@ function AddForm(props) {
     let addDistribution=()=>{
         axios.post("http://localhost:8080/distributions",{
             date: date,
+            city:city,
             address: address,
             productIds: productIdList,
         }).then(res=>props.setDistributionList(res.data))
@@ -118,7 +119,10 @@ function AddForm(props) {
             amount: <input type="number" max={100} value={amount} onChange={e => setAmount(e.target.value)} />
 
             <input type="button" value="add to distribution" onClick={addProductId} /><br/>
-            products: <ul>{productIdList.map((x,key)=><li key={key}>{x.name}</li>)}</ul>
+            Products List: <ul>{productIdList.map((x,key)=><li key={key}>{x.name}</li>)}</ul>
+            City:
+            <input type="text" placeholder="city" onChange={(event) => setCity(event.target.value)} /> <br />
+
             Address:
             <input type="text" placeholder="address" onChange={(event) => setAddress(event.target.value)} /> <br />
             Date:

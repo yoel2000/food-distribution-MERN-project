@@ -18,6 +18,7 @@ function UpdateDistribution(props) {
         axios.put("http://localhost:8080/distributions2/" + values.id, {
             'name': values.name,
             'date': values.date,
+            'city':values.city,
             'address': values.address,
             'id':  values.id
         }).then((res) => {
