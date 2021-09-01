@@ -7,8 +7,7 @@ import Dividers from "../DividersUpdate/Dividers";
 import Dispatch from "../Dispatch/Dispatch2";
 
 const axios = require('axios')
-Geocode.setApiKey("AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg");
-console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 

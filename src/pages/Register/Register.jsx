@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import './Register.css';
 import { useContext } from 'react';
 import { UserContext } from '../../UserContext';
 import { isValid } from 'date-fns';
+import { Grid, TextField, Button, Card, CardContent, Typography } from '@material-ui/core';
 
 const axios = require('axios')
 
@@ -62,27 +63,45 @@ function Register() {
   }
 
   return (
-    <div>
-      <div>
-        <form onSubmit={mySubmitHandler}>
-          <input type="text" className="mb-3" placeholder="firstname:" onChange={(event) => setFirstName(event.target.value)} /> <br />
-          <input type="text" className="mb-3" placeholder="lastname:" onChange={(event) => setLastName(event.target.value)} /> <br />
-          <input type="text" className="mb-3" placeholder="email:" onChange={(event) => setEmail(event.target.value)} /> <br />
-          <h6 className="text-muted"> We'll never share your email with anyone else.</h6> <br />
-          <input type="text" className="mb-3" placeholder="password:" onChange={(event) => setPassword(event.target.value)} /> <br />
-          <input type="text" className="mb-3" placeholder="confirm your password:" onChange={(event) => setConfirmPassword(event.target.value)} /> <br />
-          <Button variant="primary" type="submit">
-            Register now
-          </Button>
-        </form>
-        <p>You can also register with: </p> <br />
-        <div>
-          <input type="button" value= "google" onClick={googleAuth}/>
-          <a className="social_networks" href="http://localhost:8080/auth/google">Google</a> <br /> <br />
-          <a className="social_networks" href="http://localhost:8080/auth/facebook">Facebook</a> <br />
-        </div>
+    <div className="App">
+        <Grid>
+          <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "auto", marginTop:"120px" }}>
+            <CardContent>
+              <Typography style={{color:"PowderBlue"}} gutterBottom variant="h4">
+                Register
+            </Typography>
+              <form onSubmit={mySubmitHandler}>
+                <Grid container spacing={1}>
+                  <Grid xs={12} sm={6} item>
+                    <TextField placeholder="Enter first name" label="First Name" variant="outlined" onChange={(event) => setFirstName(event.target.value)}
+                    fullWidth required />
+                  </Grid>
+                  <Grid xs={12} sm={6} item>
+                    <TextField placeholder="Enter last name" label="Last Name" variant="outlined" onChange={(event) => setLastName(event.target.value)}
+                    fullWidth required />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField type="email" placeholder="Enter email" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)}
+                    fullWidth required />
+                  <h6 className="text-muted"> We'll never share your email with anyone else.</h6> <br />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField type="password" placeholder="Enter your password" label="Password" variant="outlined" onChange={(event) => setPassword(event.target.value)}
+                    fullWidth required />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField type="password" placeholder="Confirm your password" label="COnfirm Password" variant="outlined" onChange={(event) => setConfirmPassword(event.target.value)}
+                    fullWidth required />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button type="submit" variant="contained" style={{color:"SkyBlue", backgroundColor:"white"}} fullWidth>Register</Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
       </div>
-    </div>
   );
 }
 

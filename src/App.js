@@ -22,6 +22,9 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ChatContainer from "./pages/ChatContainer/ChatContainer";
 import { UserContextProvider } from "./UserContext";
 import { ManagerChat } from "./pages/ManagerChat/ManagerChat";
+import myPieChart from "./components/PieChart/PieChart";
+import myChart from "./components/Chart/Chart";
+
 
 
 function App() {
@@ -46,6 +49,8 @@ function App() {
       <Route path="/dailyDistribution" component={DailyDistribution} />
       <Route path='/addressesUpdate' component={Deliveries} />
       <Route path='/dashboard' component={Dashboard} />
+      <Route path='/piechart' component={myPieChart} />
+      <Route path="/mychart" component={myChart} />
       </BrowserRouter>
       <BrowserRouter>
       <NavbarWorker/>

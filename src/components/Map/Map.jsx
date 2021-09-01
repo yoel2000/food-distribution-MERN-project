@@ -37,7 +37,7 @@ function Map({deliveries, latitude, longitude}) {
     ]
 
     const { isLoaded, loadError } = useLoadScript({
-      googleMapsApiKey: "AIzaSyCi9rZ2iBoh4oJ-6rYiFCF60qAdOIyROkg",
+      googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
       libraries,
     });
     const [markers, setMarkers] = React.useState([]);
@@ -109,7 +109,7 @@ function Map({deliveries, latitude, longitude}) {
             >
               <div>
                 {
-                  
+
                 }
 
 

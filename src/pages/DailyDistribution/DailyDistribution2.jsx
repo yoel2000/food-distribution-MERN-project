@@ -72,12 +72,12 @@ function DailyDistribution() {
             .then(res => setProductList(res.data))
     }
 
-    
+
 
     return (
 
         <div>
-            <input type="text" placeholder="prosuct name" onChange={e => setProductName(e.target.value)} />
+            <input type="text" placeholder="product name" onChange={e => setProductName(e.target.value)} />
             <input type="button" value="add product" onClick={addProduct} />
 
             <div className="container">

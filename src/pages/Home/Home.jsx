@@ -13,7 +13,8 @@ function Home() {
       <Link to="/register">
             Register <br/>
       </Link>
-      <Link to='/home_worker'> Home worker</Link>
+      <Link to='/home_worker'> Home worker</Link> <br/>
+      <Link to='/piechart'> Piechart</Link>
       </h1>
       <img src={logo} alt="Logo" className="container-div" />
       </div>

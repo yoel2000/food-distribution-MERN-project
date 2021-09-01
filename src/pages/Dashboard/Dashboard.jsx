@@ -5,6 +5,10 @@ import ListItem from '@material-ui/core/ListItem';
 import { useState } from "react";
 import ListItemText from '@material-ui/core/ListItemText';
 import { useEffect } from "react";
+import Address from "./Address";
+import SplitPane, { Pane } from 'react-split-pane';
+import { PaneDirective, PanesDirective, SplitterComponent } from '@syncfusion/ej2-react-layouts';
+import "./Dashboard.css"
 
 
 function Dashboard(props) {
@@ -19,17 +23,16 @@ function Dashboard(props) {
 
     const classes = useStyles();
     const [selectedIndex, setSelectedIndex] = React.useState(1);
-    let [formVisibility, setFormVisibility] = useState(false);
     const [selectedId, setSelectedId] = useState(-1);
-    const [uniqueTag, setUniqueTag] = useState([])
     const [values, setValues] = useState([])
-    let [uneFois, setUneFois] = useState(false)
+    const [personnalAddress, setPersonnalAddress] = useState([])
+    let [formVisibility, setFormVisibility] = useState(false);
 
-    const handleListItemClick = (event, index, id, d) => {
+    const handleListItemClick = (event, index, id, values) => {
         setSelectedIndex(index);
         setSelectedId(id);
-        // setUniqueTag((uniqueTag) => [...uniqueTag, d.name])
     };
+
 
     let openAddingForm = () => {
         setFormVisibility(true)
@@ -39,31 +42,69 @@ function Dashboard(props) {
         props.location.state.map((d) => {
             console.log(Object.values(d)[1])
             setValues((values) => [...new Set([...values, Object.values(d)[1]])])
-
         })
        }, []);
 
 
+    useEffect(() => {
 
-    console.log(values)
-    console.log(props.location.state)
-    console.log(Object.values(props.location.state[0])[1])
+        let list = [];
+        props.location.state.map((p) => {
+            // console.log(Object.values(p))
+            // console.log(values)
+            // console.log(index);
+            if (Object.values(p)[1] === values[selectedIndex]) {
+                // console.log(Object.values(p)[0]);
+                // setPersonnalAddress((personnalAddress) => [...personnalAddress, Object.values(p)[0]])
+                list.push(Object.values(p)[0])
+            }
+            setPersonnalAddress(list);
+        });
+        console.log(personnalAddress)
+    }, [selectedIndex])
+
+
+    // console.log(values)
+    // console.log(props.location.state)
+    // console.log(Object.values(props.location.state[0])[1])
 
     return(
         <div className="container">
             <div className={classes.root}>
+            <div class="split left">
                 <List component="nav" aria-label="main mailbox folders">
                     {values.map((d, index) => (
-                    (<ListItem button selected={selectedIndex === index} onClick={(event) =>
-                        handleListItemClick(event, index, selectedId, d)} key={index}>
+                    (<ListItem button selected={selectedIndex === index}
+                        onClick={(event) => {
+                            handleListItemClick(event, index, selectedId, values)
+                            openAddingForm()
+                        }}
+                        key={index}>
                     <ListItemText primary={d} />
                     </ListItem>)
                     ))}
                 </List>
             </div>
-            {/*<div>
-            {formVisibility ? <AddForm addProduct={addProduct} productList={productList} /> : null}
-            </div>*/}
+                <div class="split right">
+                <List component="nav" aria-label="main mailbox folders">
+                    {personnalAddress.map((a, index) => (
+                    (<ListItem button selected={selectedIndex === index}
+                        onClick={(event) => {
+                            handleListItemClick(event, index, selectedId, values)
+                            openAddingForm()
+                        }}
+                        key={index}>
+                    <ListItemText primary={a} />
+                    </ListItem>)
+                    ))}
+                    </List>
+                </div>
+            </div>
+            <div>
+
+            {formVisibility ? <Address state={props.location.state} selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex} setSelectedId={setSelectedId} selectedId={selectedId} values={values}/> : null}
+            </div>
         </div>
     )
 }
