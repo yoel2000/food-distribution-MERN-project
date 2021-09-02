@@ -27,9 +27,7 @@ function Dispatch(props) {
                 'longitude': longitude,
             }).then((res) => {
                 console.log(res.data.idxs);
-                console.log(dividersList.length);
-                dividersList.map((d, id) => {
-
+                dividersList.forEach((d, id) => {
                     for (let i = 0; i < res.data.idxs.length; i++) {
                         if (res.data.idxs[i] === id) {
                             axios.put('/distributions/'+deliveries[i]._id,{...deliveries[i],distributorId:d._id})

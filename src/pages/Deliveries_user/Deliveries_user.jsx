@@ -20,16 +20,13 @@ function Deliveries_user() {
     const [selectedId, setSelectedId] = useState(-1);
     const [user,setUser]=useState();
 
-    useEffect(()=>{
-        setUser(JSON.parse(sessionStorage.getItem('cur_user')));
-    },[])
-
     useEffect(() => {
         axios.get("http://localhost:8080/users").then(x => setDistributorList(x.data))
     }, [user])
 
     useEffect(() => {
-        axios.get('http://localhost:8080/deliveriestoday/'+user?._id).then((deliveries) => {
+        axios.get('http://localhost:8080/deliveriestoday/'
+        +JSON.parse(sessionStorage.getItem('cur_user'))?._id).then((deliveries) => {
             console.log(deliveries.data)
             transformation(deliveries.data)
             setDeliveries(deliveries.data)

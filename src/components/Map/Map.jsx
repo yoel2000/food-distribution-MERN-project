@@ -26,15 +26,12 @@ const options = {
   zoomControl: true,
 };
 
-function Map({deliveries, latitude, longitude}) {
+function Map({deliveries, latitude, longitude, coordinates}) {
 
     const center = {
-      lat: latitude[0],
-      lng: longitude[0],
+      lat: Number(latitude[0]),
+      lng: Number(longitude[0]),
     };
-    const centers = [
-      latitude, longitude
-    ]
 
     const { isLoaded, loadError } = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -46,15 +43,16 @@ function Map({deliveries, latitude, longitude}) {
 
 
     const onMapClick = React.useCallback((e) => {
-    for (let i = 0; i < latitude.length; i++) {
+      console.log(coordinates)
+    for (let i = 0; i < coordinates.length; i++) {
       setMarkers((current) =>
       [
         ...current,
         {
-          lat: latitude[i],
-          lng: longitude[i],
+          lat: coordinates[i].lat,
+          lng: coordinates[i].lng,
           time: new Date(),
-          
+          color: coordinates[i].isCompleted ? "green":"red",
         },
       ])
     }
@@ -89,14 +87,14 @@ function Map({deliveries, latitude, longitude}) {
           onLoad={onMapLoad}
         >
 
-        {markers.map((marker) => (
-          <Marker
-            key={deliveries.id}
+        {markers.map((marker, key) => (
+          <Marker key={key}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               console.log(markers);
               setSelected(marker);
             }}
+            icon= {marker.color=="green"? "http://maps.google.com/mapfiles/ms/icons/green-dot.png":undefined}
             />
         ))}
 
