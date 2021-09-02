@@ -16,6 +16,7 @@ function MyChart() {
     const [chooseCity, setChooseCity] = useState([])
     const [pieChartVisibility, setPieChartVisibility] = useState(false)
     const [barChartVisibility, setBarChartVisibility] = useState(false)
+    const [data, setData] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:8080/distributions/cities').then(res => {
@@ -36,7 +37,7 @@ function MyChart() {
             setBarChartVisibility(true);
             setPieChartVisibility(false);
         }
-        else if (chooseCity.length == 1){
+        else if (chooseCity.length == 1) {
             setPieChartVisibility(true);
             setBarChartVisibility(false);
         }
@@ -64,21 +65,21 @@ function MyChart() {
             </ul>
             {pieChartVisibility ?
                 <Chart
-                width={'500px'}
-                height={'300px'}
-                chartType="PieChart"
-                // className="split left"
-                loader={<div>Loading Chart</div>}
-                data={[
-                    ['Situation', 'Number of deliveries'],
-                    ['Done', 11],
-                    ['Not done', 2],
-                ]}
-                options={{
-                    title: 'Success in the deliveries',
-                }}
-                rootProps={{ 'data-testid': '1' }}
-            />: null}
+                    width={'500px'}
+                    height={'300px'}
+                    chartType="PieChart"
+                    // className="split left"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Situation', 'Number of deliveries'],
+                        ['Done', 11],
+                        ['Not done', 2],
+                    ]}
+                    options={{
+                        title: 'Success in the deliveries',
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                /> : null}
             {barChartVisibility ? <Chart
                 width={'500px'}
                 height={'300px'}
@@ -99,7 +100,7 @@ function MyChart() {
                 }}
                 // For tests
                 rootProps={{ 'data-testid': '2' }}
-            />: null}
+            /> : null}
         </div>
 
     )
