@@ -16,7 +16,7 @@ function MyChart() {
     const [chooseCity, setChooseCity] = useState([])
     const [pieChartVisibility, setPieChartVisibility] = useState(false)
     const [barChartVisibility, setBarChartVisibility] = useState(false)
-    const [data, setData] = useState([])
+    const [distributions, setDistributions] = useState({})
 
     useEffect(() => {
         axios.get('http://localhost:8080/distributions/cities').then(res => {
@@ -25,11 +25,12 @@ function MyChart() {
         })
     }, [])
 
-    let getCities = () => {
-        axios.get('http://localhost:8080/distributions/cities').then(res => {
-            setCities(res.data);
-            ;
-        })
+    let calcDistributions = () => {
+        axios.post('http://localhost:8080/distributions/between/',{
+            cityList:cities,
+            date1:fromDate,
+            date2:toDate
+        }).then(res =>setDistributions(res.data))
     }
 
     useEffect(() => {
@@ -54,6 +55,12 @@ function MyChart() {
         }
     }
 
+    let percentage=(arr,cond)=>{
+        let count = arr.filter(cond).length;
+    return (count/(arr.length))
+    }
+    
+
     return (
         <div>
             <h6>From date:</h6>
@@ -63,6 +70,8 @@ function MyChart() {
             <ul>
                 {cities.map((c, key) => <li><Checkbox onChange={e => chooseCityHandler(e, c)} />{c}</li>)}
             </ul>
+
+            <input type="button" value="calc" onClick={calcDistributions}/><br/><br/>
             {pieChartVisibility ?
                 <Chart
                     width={'500px'}
@@ -86,15 +95,11 @@ function MyChart() {
                 chartType="Bar"
                 // className=" split right"
                 loader={<div>Loading Chart</div>}
-                data={[
-                    ['City', 'Done', 'Not done'],
-                    [chooseCity[0], 7, 2],
-                    [chooseCity[1], 8, 3]
-                ]}
+                data={[['City', 'Done', 'Not done']].concat(Object.entries(distributions).map(x=>[x[0],percentage(x[1],x=>x.isCompleted),1-percentage(x[1],x=>x.isCompleted)]))}
                 options={{
                     // Material design options
                     chart: {
-                        title: 'Succes in different cyties',
+                        title: 'work completion in different cities',
                         // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
                     },
                 }}
