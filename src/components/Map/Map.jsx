@@ -44,7 +44,7 @@ function Map({deliveries, latitude, longitude, coordinates}) {
 
     const onMapClick = React.useCallback((e) => {
       console.log(coordinates)
-    for (let i = 0; i < coordinates.length; i++) {
+    for (let i = 0; i < coordinates?.length; i++) {
       setMarkers((current) =>
       [
         ...current,
