@@ -12,65 +12,68 @@ Geocode.setRegion("isr");
 Geocode.setLocationType("ROOFTOP");
 
 function Deliveries() {
-    let [dividersList, setDividersList] = useState([])
+    let [distributorList, setDistributorList] = useState([])
     const [deliveries, setDeliveries] = useState([])
     const [latitude, setLatitude] = useState([])
     const [longitude, setLongitude] = useState([])
     const [selectedId, setSelectedId] = useState(-1);
+    const [coordinates, setCoordinates] = useState([])
+
 
 
 
     useEffect(() => {
-        axios.get("http://localhost:8080/distributors").then(x => setDividersList(x.data))
+        axios.get("http://localhost:8080/users").then(x => setDistributorList(x.data))
     }, [selectedId])
 
     useEffect(() => {
         axios.get('http://localhost:8080/deliveriestoday2').then((deliveries) => {
-        console.log(deliveries.data)
-        setDeliveries(deliveries.data)
+            console.log(deliveries.data)
+            transformation(deliveries.data)
+            setDeliveries(deliveries.data)
         })
-      }, [selectedId])
+    }, [selectedId])
 
 
-    let transformation = (deliveries, event) => {
+    let transformation = async (deliveries) => {
+        console.log("deliveries");
         console.log(deliveries);
-        event.preventDefault();
-        deliveries.forEach(del => {
-            console.log(del.address+", "+del.city)
-        Geocode.fromAddress(del.address+", "+del.city).then(
-        (response) => {
+        for (let i = 0; i < deliveries.length; i++) {
+            let del = deliveries[i];
+            console.log(del.address + ", " + del.city)
+            let response= await Geocode.fromAddress(del.address + ", " + del.city);
             console.log(response)
             let { lat, lng } = response.results[0].geometry.location;
             console.log(lat)
+            setCoordinates(old=>[...old,{lat:lat,lng:lng,isCompleted:del.isCompleted}])
             setLatitude((latitude) => [...latitude, lat])
             setLongitude((longitude) => [...longitude, lng])
-        },
-        (error) => {
-            console.error("error parsing:"+error);
         }
-        )})
-
     };
 
-    return(
+    return (
         <div>
-        <div>
-        {deliveries.length === 0 ? (
-        <h3>No deliveries for today</h3>
-      ) : (
-          <div>
-        <h3>There are {deliveries.length} deliveries for today</h3>
-        <h3 style={{float: "right"}}>
-        The deliverers:
-        <Dividers dividersList={dividersList} setSelectedId={setSelectedId}/>
-        </h3>
-        <input type="button" onClick={(event) => transformation(deliveries, event)} value="Load the map" />
-        <Dispatch dividersList={dividersList} deliveries={deliveries} latitude={latitude} longitude={longitude}/>
-        <Map deliveries={deliveries} latitude={latitude} longitude={longitude}/>
+            <div>
+                {deliveries.length === 0 ? (
+                    <h3>No deliveries for today</h3>
+                ) : (
+                    <div>
+                        <h3 style={{ float: "right" }}>
+                            The distributors:
+                            <Dividers dividersList={distributorList} setSelectedId={setSelectedId} />
+                        </h3>
+                        <h3>There are {deliveries.length} deliveries for today</h3>
+
+                        The places are:
+                        <ol>{deliveries.map((x, key) => <li key={key}>{x.address + ", " + x.city} </li>)}</ol>
+
+
+                        <Dispatch dividersList={distributorList} deliveries={deliveries} latitude={latitude} longitude={longitude} />
+                        <Map deliveries={deliveries} coordinates={coordinates} latitude={latitude} longitude={longitude} />
+                    </div>
+                )}
+            </div>
         </div>
-      )}
-      </div>
-         </div>
     )
 }
 

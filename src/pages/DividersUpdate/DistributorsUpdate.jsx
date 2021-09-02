@@ -10,11 +10,10 @@ import UpdateUser from "./UpdateUser";
 const axios = require('axios')
 
 
-function DividersUpdate() {
+function DistributorsUpdate() {
 
 
     let [userList, setUserList] = useState([])
-    let [formVisibility, setFormVisibility] = useState(false)
 
     const [selectedId, setSelectedId] = useState(-1);
 
@@ -38,11 +37,8 @@ function DividersUpdate() {
 
     return (
         <div className="container">
-            <div>
-            <input type="button" onClick={openAddingForm} value="+" />
-            </div>
             <UserList userList={userList} setSelectedId={setSelectedId}/>
-            <UpdateUser userList={userList} selectedId={selectedId} setDividersList={setDividersList}/>
+            <UpdateUser userList={userList} selectedId={selectedId} setUserList={setUserList}/>
         </div>
     )
 }
@@ -50,4 +46,4 @@ function DividersUpdate() {
 
 
 
-export default DividersUpdate
+export default DistributorsUpdate

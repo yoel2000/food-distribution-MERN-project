@@ -31,7 +31,7 @@ function Dividers(props) {
             <List component="nav" aria-label="main mailbox folders">
                 {props.dividersList.map((x, index) =>
                 (<ListItem button selected={selectedIndex === index} onClick={(event) => handleListItemClick(event, index, x.id)} key={index}>
-                    <ListItemText primary={x.name} />
+                    <ListItemText primary={x.local?.firstname+x.local?.lastname} />
                 </ListItem>)
                 )}
             </List>
