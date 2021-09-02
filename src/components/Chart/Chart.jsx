@@ -14,6 +14,9 @@ function MyChart() {
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState('')
     const [chooseCity, setChooseCity] = useState([])
+    const [pieChartVisibility, setPieChartVisibility] = useState(false)
+    const [barChartVisibility, setBarChartVisibility] = useState(false)
+    const [data, setData] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:8080/distributions/cities').then(res => {
@@ -29,13 +32,23 @@ function MyChart() {
         })
     }
 
+    useEffect(() => {
+        if (chooseCity.length > 1) {
+            setBarChartVisibility(true);
+            setPieChartVisibility(false);
+        }
+        else if (chooseCity.length == 1) {
+            setPieChartVisibility(true);
+            setBarChartVisibility(false);
+        }
+        else if (chooseCity.length == 0)
+            setPieChartVisibility(false);
+    }, [chooseCity])
+
     let chooseCityHandler = (event, city) => {
         if (event.target.checked)
             (setChooseCity((chooseCity) => [...chooseCity, city]));
         else {
-
-            var index = chooseCity.indexOf(city);
-
             const newList = chooseCity.filter((c) => c !== city);
             setChooseCity(newList);
         }
@@ -50,49 +63,44 @@ function MyChart() {
             <ul>
                 {cities.map((c, key) => <li><Checkbox onChange={e => chooseCityHandler(e, c)} />{c}</li>)}
             </ul>
-
-            <Chart
-                width={'500px'}
-                height={'300px'}
-                chartType="PieChart"
-                // className="split left"
-                loader={<div>Loading Chart</div>}
-                data={[
-                    ['Task', 'Hours per Day'],
-                    ['Work', 11],
-                    ['Eat', 2],
-                    ['Commute', 2],
-                    ['Watch TV', 2],
-
-                ]}
-                options={{
-                    title: 'My Daily Activities',
-                }}
-                rootProps={{ 'data-testid': '1' }}
-            />
-            <Chart
+            {pieChartVisibility ?
+                <Chart
+                    width={'500px'}
+                    height={'300px'}
+                    chartType="PieChart"
+                    // className="split left"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Situation', 'Number of deliveries'],
+                        ['Done', 11],
+                        ['Not done', 2],
+                    ]}
+                    options={{
+                        title: 'Success in the deliveries',
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                /> : null}
+            {barChartVisibility ? <Chart
                 width={'500px'}
                 height={'300px'}
                 chartType="Bar"
                 // className=" split right"
                 loader={<div>Loading Chart</div>}
                 data={[
-                    ['Year', 'Sales', 'Expenses', 'Profit'],
-                    ['2014', 1000, 400, 200],
-                    ['2015', 1170, 460, 250],
-                    ['2016', 660, 1120, 300],
-                    ['2017', 1030, 540, 350],
+                    ['City', 'Done', 'Not done'],
+                    [chooseCity[0], 7, 2],
+                    [chooseCity[1], 8, 3]
                 ]}
                 options={{
                     // Material design options
                     chart: {
-                        title: 'Company Performance',
-                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                        title: 'Succes in different cyties',
+                        // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
                     },
                 }}
                 // For tests
                 rootProps={{ 'data-testid': '2' }}
-            />
+            /> : null}
         </div>
 
     )
