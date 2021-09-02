@@ -25,6 +25,7 @@ import { ManagerChat } from "./pages/ManagerChat/ManagerChat";
 import myPieChart from "./components/PieChart/PieChart";
 import MyChart from "./components/Chart/Chart";
 import Deliveries_user from "./pages/Deliveries_user/Deliveries_user";
+import BlogUser from "./pages/Blog/BlogUser";
 
 
 
@@ -44,21 +45,21 @@ function App() {
       <NavbarManager/>
       <Route path='/home_manager' component={Home_manager}/>
       <Route path='/deliveries' component={Deliveries} />
-      <Route path='/deliveriesUser' component={Deliveries_user} />
       <Route path="/blog" component={Blog} />
       <Route path="/chat" component={ManagerChat} />
       <Route path="/dividersUpdate" component={DistributorsUpdate} />
       <Route path="/dailyDistribution" component={DailyDistribution} />
       <Route path='/addressesUpdate' component={Deliveries} />
       <Route path='/dashboard' component={Dashboard} />
-      <Route path='/piechart' component={myPieChart} />
       <Route path="/mychart" component={MyChart} />
+       <Route path='/home_worker' component={HomeWorker} />
+      <Route path='/yourDeliveries' component={Deliveries_user} />
+      <Route path="/watchBlog" component={BlogUser} />
+      <Route path="/chat" component={ManagerChat} />
       </BrowserRouter>
       <BrowserRouter>
       <NavbarWorker/>
-      <Route path='/home_worker' component={HomeWorker} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/chat" component={ManagerChat} />
+     
       </BrowserRouter>
       </Switch>
       </UserContextProvider>
